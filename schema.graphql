@@ -1,6 +1,22 @@
-type ExampleEntity @entity {
+type OwnershipTransferred @entity {
   id: ID!
   count: BigInt!
   previousOwner: Bytes! # address
   newOwner: Bytes! # address
+}
+
+type Approval @entity {
+  id: ID!
+  count: BigInt!
+  owner: Bytes!
+  spender: Bytes!
+  value: BigInt!
+}
+
+type Transfer @entity {
+  id: ID!
+  count: BigInt!
+  from: Bytes!
+  to: Bytes!
+  value: BigInt!
 }
