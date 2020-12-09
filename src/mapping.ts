@@ -5,17 +5,17 @@ import {
   Approval,
   Transfer
 } from "../generated/drgn/drgn"
-import { OwnershipTransferred, Approval, Transfer } from "../generated/schema"
+import { _OwnershipTransferred, _Approval, _Transfer } from "../generated/schema"
 
 export function handleOwnershipTransferred(event: OwnershipTransferred): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
-  let entity = OwnershipTransferred.load(event.transaction.from.toHex())
+  let entity = _OwnershipTransferred.load(event.transaction.from.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (entity == null) {
-    entity = new OwnershipTransferred(event.transaction.from.toHex())
+    entity = new _OwnershipTransferred(event.transaction.from.toHex())
 
     // Entity fields can be set using simple assignments
     entity.count = BigInt.fromI32(0)
@@ -63,10 +63,10 @@ export function handleOwnershipTransferred(event: OwnershipTransferred): void {
 }
 
 export function handleApproval(event: Approval): void {
-  let entity = Approval.load(event.params.owner.toHex())
+  let entity = _Approval.load(event.params.owner.toHex())
 
   if (entity == null) {
-    entity = new Approval(event.params.owner.toHex())
+    entity = new _Approval(event.params.owner.toHex())
     entity.count = BigInt.fromI32(0)  
   }
 
@@ -78,10 +78,10 @@ export function handleApproval(event: Approval): void {
 }
 
 export function handleTransfer(event: Transfer): void {
-  let entity = Transfer.load(event.params.from.toHex())
+  let entity = _Transfer.load(event.params.from.toHex())
 
   if (entity == null) {
-    entity = new Transfer(event.params.from.toHex())
+    entity = new _Transfer(event.params.from.toHex())
     entity.count = BigInt.fromI32(0)  
   }
 
